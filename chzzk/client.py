@@ -9,13 +9,13 @@ from chzzk.errors import ChzzkHTTPError
 
 @dataclass
 class Credential:
-    nid_auth: str
-    nid_session: str
+    auth: str
+    session: str
 
     def as_cookie(self) -> dict[str, str]:
         return {
-            "NID_AUT": self.nid_auth,
-            "NID_SES": self.nid_session,
+            "NID_AUT": self.auth,
+            "NID_SES": self.session,
         }
 
 
@@ -40,7 +40,7 @@ class HTTPClient:
         data: Optional[Mapping[str, Any]] = None,
         **kwargs,
     ) -> Any:
-        raw_response = await self._client.request(
+        response = await self._client.request(
             method=method,
             url=urljoin(self.BASE_URL, url),
             params=params,
@@ -48,14 +48,14 @@ class HTTPClient:
             **kwargs,
         )
 
-        if raw_response.status_code != 200:
-            raise ChzzkHTTPError(message="Server did not return a successful response", code=raw_response.status_code)
+        if response.is_error:
+            raise ChzzkHTTPError(message=response.text, code=response.status_code)
 
-        response = raw_response.json()
-        if response["code"] != 200:
-            raise ChzzkHTTPError(message=response["message"], code=response["code"])
+        payload = response.json()
+        if payload["code"] != 200:
+            raise ChzzkHTTPError(message=payload["message"], code=payload["code"])
 
-        return response["content"]
+        return payload["content"]
 
     async def get(
         self,
