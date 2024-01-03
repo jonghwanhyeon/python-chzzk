@@ -6,7 +6,7 @@ An unofficial Python library for CHZZK. **Caution**: APIs are currently experime
 
 ## Installation
 ```python
-pip install chzzk
+pip install python-chzzk
 ```
 
 ## Usage
