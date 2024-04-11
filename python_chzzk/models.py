@@ -42,12 +42,19 @@ class PersonalData(RawModel):
     following: Optional[Following] = None
 
 
+class SubscriptionPaymentAvailability(RawModel):
+    iap_availability: bool
+    iab_availability: bool
+
+
 class PartialChannel(RawModel):
     channel_id: Optional[str] = None
     channel_name: str
     channel_image_url: Optional[str] = None
     verified_mark: bool
     personal_data: Optional[PersonalData] = None
+    subscription_availability: Optional[bool] = None
+    subscription_payment_availability: Optional[SubscriptionPaymentAvailability] = None
 
 
 class Channel(PartialChannel):
