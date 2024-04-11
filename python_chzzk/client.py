@@ -27,6 +27,9 @@ class HTTPClient:
 
         self._credential = credential
         self._client = httpx.AsyncClient()
+        self._headers = {
+            'user-agent': 'Chrome/123.0.0.0',
+        }
 
         if self._credential is not None:
             self._client.cookies.update(self._credential.as_cookie())
@@ -43,6 +46,7 @@ class HTTPClient:
         response = await self._client.request(
             method=method,
             url=urljoin(self.BASE_URL, url),
+            headers=self._headers,
             params=params,
             data=data,
             **kwargs,
