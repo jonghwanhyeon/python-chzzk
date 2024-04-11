@@ -6,7 +6,7 @@ from typing import Annotated, Any, Generic, Optional, TypeVar, Union
 from pydantic import AfterValidator, BaseModel, ConfigDict, Field, Json
 from pydantic.alias_generators import to_camel
 
-from chzzk.utils import as_kst, to_kst
+from python_chzzk.utils import as_kst, to_kst
 
 T = TypeVar("T", bound="SearchRecord")
 

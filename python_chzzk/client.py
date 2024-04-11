@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 
 import httpx
 
-from chzzk.errors import ChzzkHTTPError
+from python_chzzk.errors import ChzzkHTTPError
 
 
 @dataclass

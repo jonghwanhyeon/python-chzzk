@@ -1,7 +1,7 @@
 import asyncio
 
-from chzzk import Chzzk
-from chzzk.client import Credential
+from python_chzzk import Chzzk
+from python_chzzk.client import Credential
 
 
 async def main():
