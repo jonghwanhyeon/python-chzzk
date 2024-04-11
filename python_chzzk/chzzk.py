@@ -89,7 +89,7 @@ class Chzzk:
         return Channel(**response)
 
     async def video(self, no: int) -> Video:
-        response = await self._client.get(f"service/v1/videos/{no}")
+        response = await self._client.get(f"service/v2/videos/{no}")
         return Video(**response)
 
 

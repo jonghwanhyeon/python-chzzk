@@ -227,6 +227,7 @@ class VideoMetadata(RawModel):
 class PartialVideo(VideoMetadata):
     trailer_url: Optional[str] = None
     exposure: bool
+    video_category: Optional[str]
     channel: PartialChannel
 
 
@@ -235,6 +236,7 @@ class Video(PartialVideo):
     in_key: str
     live_open_date: Annotated[datetime, AfterValidator(to_kst)]
     vod_status: str
+    user_adult_status: Optional[str]
 
     prev_video: Optional[PartialVideo] = None
     next_video: Optional[PartialVideo] = None
