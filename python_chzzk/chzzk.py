@@ -19,7 +19,7 @@ class ChzzkLive:
         self._client = client
 
     async def status(self, channel_id: str) -> LiveStatus:
-        response = await self._client.get(f"polling/v1/channels/{channel_id}/live-status")
+        response = await self._client.get(f"polling/v2/channels/{channel_id}/live-status")
         return LiveStatus(**response)
 
     async def detail(self, channel_id: str) -> LiveDetail:

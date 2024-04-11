@@ -85,6 +85,12 @@ class LiveStatus(RawModel):
     live_category_value: str
     live_polling_status: Json[LivePollingStatus] = Field(alias="livePollingStatusJson")
     fault_status: Any
+    user_adult_status: Optional[str]
+    chat_active: bool
+    chat_available_group: str
+    chat_available_condition: str
+    min_follower_minute: int
+    chat_donation_ranking_exposure: bool
 
 
 class LivePlaybackMetaCDNInfo(RawModel):
