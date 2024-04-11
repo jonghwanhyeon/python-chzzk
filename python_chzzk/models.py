@@ -207,6 +207,7 @@ class VideoMetadata(RawModel):
     read_count: int
     channel_id: Optional[str] = None
     publish_date_at: Annotated[datetime, AfterValidator(as_kst)]
+    adult: bool
     category_type: Optional[str] = None
     video_category: str
     video_category_value: str
