@@ -202,6 +202,9 @@ class LiveDetail(Live):
     min_follower_minute: int
     channel: PartialChannel
     live_polling_status: Json[LivePollingStatus] = Field(alias="livePollingStatusJson")
+    p2p_quality: list[Any] = Field(alias="p2pQuality")
+    user_adult_status: Optional[str]
+    chat_donation_ranking_exposure: bool
 
 
 class VideoMetadata(RawModel):
