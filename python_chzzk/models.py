@@ -98,7 +98,8 @@ class LivePlaybackMeta(RawModel):
     live_id: str
     paid_live: bool
     cdn_info: LivePlaybackMetaCDNInfo
-    p2p: bool = Field(alias="p2p")
+    # p2p: bool = Field(alias="p2p")
+    cmcd_enabled: bool
 
 
 class LivePlaybackServiceMeta(RawModel):
@@ -170,12 +171,13 @@ class LivePlayback(RawModel):
 
 class Live(RawModel):
     live_title: str
-    live_image_url: str
+    live_image_url: Optional[str]
     default_thumbnail_image_url: Optional[str] = None
     concurrent_user_count: int
     accumulate_count: int
     open_date: Annotated[datetime, AfterValidator(to_kst)]
     live_id: int
+    adult: bool
     chat_channel_id: str
     category_type: Optional[str] = None
     live_category: Optional[str] = None
