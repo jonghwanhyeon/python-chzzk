@@ -28,7 +28,7 @@ class HTTPClient:
         self._credential = credential
         self._client = httpx.AsyncClient()
         self._headers = {
-            'user-agent': 'Chrome/123.0.0.0',
+            "user-agent": "Chrome/123.0.0.0",
         }
 
         if self._credential is not None:
