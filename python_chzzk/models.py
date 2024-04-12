@@ -6,7 +6,7 @@ from typing import Annotated, Any, Generic, Optional, TypeVar, Union
 from pydantic import AfterValidator, BaseModel, ConfigDict, Field, Json
 from pydantic.alias_generators import to_camel
 
-from chzzk.utils import as_kst, to_kst
+from python_chzzk.utils import as_kst, to_kst
 
 T = TypeVar("T", bound="SearchRecord")
 
@@ -42,12 +42,19 @@ class PersonalData(RawModel):
     following: Optional[Following] = None
 
 
+class SubscriptionPaymentAvailability(RawModel):
+    iap_availability: bool
+    iab_availability: bool
+
+
 class PartialChannel(RawModel):
     channel_id: Optional[str] = None
     channel_name: str
     channel_image_url: Optional[str] = None
     verified_mark: bool
     personal_data: Optional[PersonalData] = None
+    subscription_availability: Optional[bool] = None
+    subscription_payment_availability: Optional[SubscriptionPaymentAvailability] = None
 
 
 class Channel(PartialChannel):
@@ -78,6 +85,12 @@ class LiveStatus(RawModel):
     live_category_value: str
     live_polling_status: Json[LivePollingStatus] = Field(alias="livePollingStatusJson")
     fault_status: Any
+    user_adult_status: Optional[str]
+    chat_active: bool
+    chat_available_group: str
+    chat_available_condition: str
+    min_follower_minute: int
+    chat_donation_ranking_exposure: bool
 
 
 class LivePlaybackMetaCDNInfo(RawModel):
@@ -91,7 +104,8 @@ class LivePlaybackMeta(RawModel):
     live_id: str
     paid_live: bool
     cdn_info: LivePlaybackMetaCDNInfo
-    p2p: bool = Field(alias="p2p")
+    # p2p: bool = Field(alias="p2p")
+    cmcd_enabled: bool
 
 
 class LivePlaybackServiceMeta(RawModel):
@@ -163,12 +177,13 @@ class LivePlayback(RawModel):
 
 class Live(RawModel):
     live_title: str
-    live_image_url: str
+    live_image_url: Optional[str]
     default_thumbnail_image_url: Optional[str] = None
     concurrent_user_count: int
     accumulate_count: int
     open_date: Annotated[datetime, AfterValidator(to_kst)]
     live_id: int
+    adult: bool
     chat_channel_id: str
     category_type: Optional[str] = None
     live_category: Optional[str] = None
@@ -187,6 +202,9 @@ class LiveDetail(Live):
     min_follower_minute: int
     channel: PartialChannel
     live_polling_status: Json[LivePollingStatus] = Field(alias="livePollingStatusJson")
+    p2p_quality: list[Any] = Field(alias="p2pQuality")
+    user_adult_status: Optional[str]
+    chat_donation_ranking_exposure: bool
 
 
 class VideoMetadata(RawModel):
@@ -200,6 +218,7 @@ class VideoMetadata(RawModel):
     read_count: int
     channel_id: Optional[str] = None
     publish_date_at: Annotated[datetime, AfterValidator(as_kst)]
+    adult: bool
     category_type: Optional[str] = None
     video_category: str
     video_category_value: str
@@ -208,6 +227,7 @@ class VideoMetadata(RawModel):
 class PartialVideo(VideoMetadata):
     trailer_url: Optional[str] = None
     exposure: bool
+    video_category: Optional[str]
     channel: PartialChannel
 
 
@@ -216,6 +236,7 @@ class Video(PartialVideo):
     in_key: str
     live_open_date: Annotated[datetime, AfterValidator(to_kst)]
     vod_status: str
+    user_adult_status: Optional[str]
 
     prev_video: Optional[PartialVideo] = None
     next_video: Optional[PartialVideo] = None

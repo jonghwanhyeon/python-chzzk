@@ -1,7 +1,7 @@
 from typing import Optional
 
-from chzzk.client import ChzzkClient, Credential, GameClient
-from chzzk.models import (
+from python_chzzk.client import ChzzkClient, Credential, GameClient
+from python_chzzk.models import (
     Channel,
     ChannelSearchRecord,
     LiveDetail,
