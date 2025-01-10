@@ -45,7 +45,10 @@ class HTTPClient:
             url=urljoin(self.BASE_URL, url),
             params=params,
             data=data,
-            **kwargs,
+            **{
+                'headers': {'User-Agent': 'Mozilla/5.0'},
+                **kwargs
+            },
         )
 
         if response.is_error:
