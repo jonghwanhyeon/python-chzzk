@@ -72,7 +72,7 @@ class LiveStatus(RawModel):
     accumulate_count: int
     paid_promotion: bool
     adult: bool
-    chat_channel_id: str
+    chat_channel_id: Optional[str] = None
     category_type: Optional[str] = None
     live_category: Optional[str] = None
     live_category_value: str
@@ -163,18 +163,18 @@ class LivePlayback(RawModel):
 
 class Live(RawModel):
     live_title: str
-    live_image_url: str
+    live_image_url: Optional[str] = None
     default_thumbnail_image_url: Optional[str] = None
     concurrent_user_count: int
     accumulate_count: int
     open_date: Annotated[datetime, AfterValidator(to_kst)]
     live_id: int
-    chat_channel_id: str
+    chat_channel_id: Optional[str] = None
     category_type: Optional[str] = None
     live_category: Optional[str] = None
     live_category_value: str
     channel_id: Optional[str] = None
-    live_playback: Json[LivePlayback] = Field(alias="livePlaybackJson")
+    live_playback: Optional[Json[LivePlayback]] = Field(None, alias="livePlaybackJson")
 
 
 class LiveDetail(Live):
@@ -191,17 +191,17 @@ class LiveDetail(Live):
 
 class VideoMetadata(RawModel):
     video_no: int
-    video_id: str
+    video_id: Optional[str] = None
     video_title: str
     video_type: str
     publish_date: Annotated[datetime, AfterValidator(to_kst)]
-    thumbnail_image_url: str
+    thumbnail_image_url: Optional[str] = None
     duration: int
     read_count: int
     channel_id: Optional[str] = None
     publish_date_at: Annotated[datetime, AfterValidator(as_kst)]
     category_type: Optional[str] = None
-    video_category: str
+    video_category: Optional[str] = None
     video_category_value: str
 
 
