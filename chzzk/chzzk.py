@@ -18,13 +18,13 @@ class ChzzkLive:
     def __init__(self, client: ChzzkClient):
         self._client = client
 
-    async def status(self, channel_id: str) -> LiveStatus:
-        response = await self._client.get(f"polling/v1/channels/{channel_id}/live-status")
-        return LiveStatus(**response)
+    async def status(self, channel_id: str, **kwargs) -> Optional[LiveStatus]:
+        response = await self._client.get(f"polling/v2/channels/{channel_id}/live-status", **kwargs)
+        return response and LiveStatus(**response)
 
-    async def detail(self, channel_id: str) -> LiveDetail:
-        response = await self._client.get(f"service/v1/channels/{channel_id}/live-detail")
-        return LiveDetail(**response)
+    async def detail(self, channel_id: str, **kwargs) -> Optional[LiveDetail]:
+        response = await self._client.get(f"service/v2/channels/{channel_id}/live-detail", **kwargs)
+        return response and LiveDetail(**response)
 
 
 class ChzzkSearch:
@@ -84,12 +84,12 @@ class Chzzk:
     async def me(self) -> User:
         return await self._game.me()
 
-    async def channel(self, id: str) -> Channel:
-        response = await self._client.get(f"service/v1/channels/{id}")
+    async def channel(self, id: str, **kwargs) -> Channel:
+        response = await self._client.get(f"service/v1/channels/{id}", **kwargs)
         return Channel(**response)
 
-    async def video(self, no: int) -> Video:
-        response = await self._client.get(f"service/v1/videos/{no}")
+    async def video(self, no: int, **kwargs) -> Video:
+        response = await self._client.get(f"service/v2/videos/{no}", **kwargs)
         return Video(**response)
 
 
