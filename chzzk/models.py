@@ -15,7 +15,7 @@ class RawModel(BaseModel):
     model_config = ConfigDict(
         alias_generator=to_camel,
         frozen=True,
-        extra="forbid",
+        extra="ignore",
     )
 
 
