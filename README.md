@@ -5,9 +5,15 @@ An unofficial Python library for CHZZK. **Caution**: APIs are currently experime
 - Python 3.8+
 
 ## Installation
-```python
+```
 pip install python-chzzk
 ```
+
+> [!NOTE]
+> 지금 보고 계시는 fork 버전인 `zer0ken/python-chzzk`을 설치하려면 다음 명령어를 실행하세요.
+> ```
+> pip install -e git+https://github.com/zer0ken/python-chzzk.git@main#egg=python-chzzk
+> ```
 
 ## Usage
 ```python
