@@ -209,6 +209,3 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/python,macos
 
 internal-assets/
-
-# Visual Studio Code
-.vscode/
